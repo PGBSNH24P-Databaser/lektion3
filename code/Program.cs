@@ -13,6 +13,7 @@ public class PostgresTodoManager : TodoManager
 {
     private NpgsqlConnection connection;
 
+    // Logiken för anslutning har flyttats hit.
     public PostgresTodoManager() {
         string connectionString = "Host=localhost;Username=postgres;Password=password;Database=lektion3";
 
@@ -38,6 +39,7 @@ public class PostgresTodoManager : TodoManager
         throw new NotImplementedException();
     }
 
+    // Logiken för remove har flyttats hit.
     public void Remove(string title)
     {
         var deleteTodoSql = "DELETE FROM todos WHERE title = @title";
@@ -48,6 +50,7 @@ public class PostgresTodoManager : TodoManager
         }
     }
 
+    // Logiken för save har flyttats hit.
     public void Save(string title, string description)
     {
         var insertTodoSql = "INSERT INTO todos (title, description) VALUES (@title, @description)";
@@ -70,6 +73,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        // Här fanns tidigare logiken för anslutning direkt.
         var manager = new PostgresTodoManager();
         Console.WriteLine("Welcome to the app.");
 
@@ -88,6 +92,7 @@ class Program
                         description += commandParts[i] + " ";
                     }
 
+                    // Här fanns tidigare logiken för save direkt.
                     manager.Save(title, description);
 
                     Console.WriteLine("Created todo and saved to db.");
@@ -95,6 +100,7 @@ class Program
                 case "remove-todo":
                     var removeTitle = commandParts[1];
 
+                    // Här fanns tidigare logiken för remove direkt.
                     manager.Remove(removeTitle);
 
                     Console.WriteLine("Removed todo from db.");
